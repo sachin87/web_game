@@ -6,6 +6,7 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'haml'
 
 
 # Gems used only for assets and not required
@@ -28,6 +29,10 @@ end
 
 group :production do
   gem 'pg'
+end
+
+group :test do
+  gem "rspec-rails"
 end
 
 # To use ActiveModel has_secure_password
