@@ -31,8 +31,15 @@ group :production do
   gem 'pg'
 end
 
-group :test do
+group :developent, :test do
   gem "rspec-rails"
+  gem 'guard-rspec', '0.5.5'
+end 
+
+group :test do
+  gem 'capybara', '1.1.2'
+  gem 'guard-spork'
+  gem 'spork'
 end
 
 # To use ActiveModel has_secure_password
