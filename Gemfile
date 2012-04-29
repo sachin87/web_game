@@ -7,6 +7,7 @@ gem 'rails', '3.2.3'
 
 gem 'mysql2'
 gem 'haml'
+gem 'bcrypt-ruby'
 
 
 # Gems used only for assets and not required
@@ -25,6 +26,7 @@ gem 'jquery-rails'
 
 group :development do
   gem 'therubyracer'
+  gem 'annotate', '~> 2.4.1.beta' 
 end
 
 group :production do
@@ -34,6 +36,7 @@ end
 group :developent, :test do
   gem "rspec-rails"
   gem 'guard-rspec', '0.5.5'
+  gem 'debugger'
 end 
 
 group :test do

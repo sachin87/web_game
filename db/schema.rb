@@ -11,14 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428180210) do
+ActiveRecord::Schema.define(:version => 20120429125934) do
 
   create_table "gamers", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
+
+  add_index "gamers", ["email"], :name => "index_gamers_on_email", :unique => true
 
   create_table "games", :force => true do |t|
     t.string   "score"
