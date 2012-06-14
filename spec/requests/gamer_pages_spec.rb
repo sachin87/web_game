@@ -45,7 +45,7 @@ describe "Gamer pages" do
         fill_in "Name",         with: "Example Gamer"
         fill_in "Email",        with: "gamer@example.com"
         fill_in "Password",     with: "password"
-        fill_in "Confirmation", with: "password"
+        fill_in "Confirm Password", with: "password"
       end
 
       it "should create a gamer" do
@@ -62,15 +62,22 @@ describe "Gamer pages" do
       end
 
       describe "followed by signout" do
-        before { click_link "Sign out" }
+        before do
+          click_button submit
+          click_link "Sign out"
+        end
         it { should have_link('Sign in') }
       end
 
     end
+  end
 
   describe "edit" do
     let(:gamer) { FactoryGirl.create(:gamer) }
-    before { visit edit_gamer_path(gamer) }
+    before do
+      sign_in gamer
+      visit edit_gamer_path(gamer)
+    end
 
     describe "page" do
       it { should have_selector('h1',    text: "Update your profile") }
@@ -95,7 +102,23 @@ describe "Gamer pages" do
       specify { gamer.reload.name.should  == new_name }
       specify { gamer.reload.email.should == new_email }
     end
+
+       describe "as wrong gamer" do
+      let(:gamer) { FactoryGirl.create(:gamer) }
+      let(:wrong_gamer) { FactoryGirl.create(:gamer, email: "wrong@example.com") }
+      before { sign_in gamer }
+
+      describe "visiting Users#edit page" do
+        before { visit edit_gamer_path(wrong_gamer) }
+        it { should_not have_selector('title', text: full_title('Edit gamer')) }
+      end
+
+      describe "submitting a PUT request to the Gamers#update action" do
+        before { put gamer_path(wrong_gamer) }
+        specify { response.should redirect_to(root_path) }
+      end
+    end
   end
+
   end
   
-end

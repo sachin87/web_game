@@ -4,7 +4,7 @@ module SessionsHelper
     cookies.permanent[:remember_token] = gamer.remember_token
     self.current_gamer = gamer
   end
-
+  
   def signed_in?
     !current_gamer.nil?
   end

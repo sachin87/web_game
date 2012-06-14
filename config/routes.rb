@@ -4,10 +4,12 @@ Battleship::Application.routes.draw do
   get "/help" => "home#help"
   get "/about" => "home#about"
   get "/contact" => "home#contact"
+  
+  resources :sessions, only: [:new, :create, :destroy]
 
-  get 'signup' => 'gamers#create' , :as =>  :signup
-  post 'signin' => 'sessions#create' , :as =>  :signin
-  match 'signout' => 'sessions#deastroy' , :as =>  :signout
+  get '/signup',  to: 'gamers#new'
+  get '/signin',  to: 'sessions#new'
+  delete '/signout', to: 'sessions#destroy'
 
   resources :games
 

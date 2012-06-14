@@ -25,6 +25,7 @@ describe Gamer do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:remember_token) }
 
 
   it { should be_valid }
@@ -51,7 +52,7 @@ describe Gamer do
 
   describe "when email format is invalid" do
     it "should be invalid" do
-      email_addresses = %w[gamer@foo,com user_at_foo.org example.user@foo.]
+      email_addresses = %w[gamer@foo,com gamer_at_foo.org example.gamer@foo.]
       email_addresses.each do |invalid_address|
         @gamer.email = invalid_address
         @gamer.should_not be_valid
@@ -61,7 +62,7 @@ describe Gamer do
 
   describe "when email format is valid" do
     it "should be valid" do
-      email_addresses = %w[user@foo.com A_USER@f.b.org frst.lst@foo.jp a+b@baz.cn]
+      email_addresses = %w[gamer@foo.com A_GAMER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       email_addresses.each do |valid_address|
         @gamer.email = valid_address
         @gamer.should be_valid
@@ -113,6 +114,11 @@ end
       @gamer.save
       @gamer.reload.email.should == mixed_case_email.downcase
     end
+  end
+
+  describe "remember token" do
+    before { @gamer.save }
+    its(:remember_token) { should_not be_blank }
   end
 
 end
