@@ -105,4 +105,14 @@ describe "return value of authenticate method" do
   end
 end
 
+ describe "email address with mixed case" do
+    let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
+
+    it "should be saved as all lower-case" do
+      @gamer.email = mixed_case_email
+      @gamer.save
+      @gamer.reload.email.should == mixed_case_email.downcase
+    end
+  end
+
 end

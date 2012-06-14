@@ -1,3 +1,8 @@
+<% provide(:title, 'Home') %>
+Battleship
+
+<% if @current_user && @current_game.present? %>
+
 <%= link_to "Start New game", games_path, method: :post %>
 
-<% if @current_game.present? %>
+<% end %>
